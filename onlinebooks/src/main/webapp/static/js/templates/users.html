@@ -1,0 +1,39 @@
+<br>
+<h5 class="text-center">Users</h5>
+<br>
+
+<div class="table-responsive">
+	<table class="table table-striped table-bordered">
+		<thead>
+			<tr class="table-success">
+				<th>USERNAME</th>
+				<th>EMAIL</th>
+				<th>AUTHORITY</th>
+				<th>ENABLED</th>
+				<th>MANAGE</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr data-ng-hide="users.length">
+				<td colspan="5" class="text-center">No Data</td>
+			</tr>
+			<tr data-ng-repeat="user in users">
+				<td>{{user.username}}</td>
+				<td>{{user.email}}</td>
+				<td>{{user.authority}}</td>
+				<td>{{user.enabled}}</td>
+				<td><button class="btn btn-primary" data-ng-click="disableUserByUsername(user.username)">Disable</button>
+					<button class="btn btn-danger" data-ng-click="deleteUserByUsername(user.username)">Delete</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<br>
+<br>
+
+<pagination total-pages="{{totalPages}}" current-page="{{currentPage}}"
+	page-size="{{pageSize}}" url="#!/users-page"></pagination>
+
+<br>
+<br>

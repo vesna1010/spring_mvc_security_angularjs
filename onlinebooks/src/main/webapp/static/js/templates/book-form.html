@@ -1,0 +1,110 @@
+<br>
+<h5 class="text-center">Save Book</h5>
+<br>
+
+<form name="form" novalidate data-ng-submit="saveBook(book)">
+	<div class="form-group row">
+		<label for="date"
+			class="col-sm-3 offset-sm-1 col-form-label text-right">DATE (yyyy-MM-dd)</label>
+		<div class="col-sm-6">
+			<input name="date" type="text" class="form-control"
+				data-ng-pattern="/^\d{4}-\d{2}-\d{2}$/" data-ng-model="book.date"
+				required>
+			<div data-ng-show="form.date.$dirty && form.date.$invalid" class="text-danger">
+				<span data-ng-show="form.date.$error.required">Please enter a date</span> 
+				<span data-ng-show="form.date.$error.pattern">This is not a valid date</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label for="isbn"
+			class="col-sm-3 offset-sm-1 col-form-label text-right">ISBN</label>
+		<div class="col-sm-6">
+			<input name="isbn" type="text" class="form-control"
+				data-ng-model="book.isbn" data-ng-pattern="/^[\d]{13}$/"
+				required>
+			<div data-ng-show="form.isbn.$dirty && form.isbn.$invalid" class="text-danger">
+				<span data-ng-show="form.isbn.$error.required">Please enter a isbn</span> 
+				<span data-ng-show="form.isbn.$error.pattern">This is not a valid isbn</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label for="title"
+			class="col-sm-3 offset-sm-1 col-form-label text-right">TITLE</label>
+		<div class="col-sm-6">
+			<input name="title" type="text" class="form-control"
+				data-ng-model="book.title" data-ng-pattern="/^[a-zA-z0-9\s]{5,100}$/"
+				required>
+			<div data-ng-show="form.title.$dirty && form.title.$invalid" class="text-danger">
+				<span data-ng-show="form.title.$error.required">Please enter a title</span> 
+				<span data-ng-show="form.title.$error.pattern">This is not a valid title</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label for="language"
+			class="col-sm-3 offset-sm-1 col-form-label text-right">LANGUAGE</label>
+		<div class="col-sm-6">
+			<select name="language" class="form-control" data-ng-model="book.language"
+				data-ng-options="language for language in languages" required>
+				<option value=""></option>
+			</select>
+			<div data-ng-show="form.language.$dirty && form.category.$invalid" class="text-danger">
+				<span data-ng-show="form.language.$error.required">Please select a language</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label for="category"
+			class="col-sm-3 offset-sm-1 col-form-label text-right">CATEGORY</label>
+		<div class="col-sm-6">
+			<select name="category" class="form-control" data-ng-model="book.category"
+				data-ng-options="category.name for category in categories"
+				required>
+			</select>
+			<div data-ng-show="form.category.$dirty && form.category.$invalid" class="text-danger">
+				<span data-ng-show="form.category.$error.required">Please select a category</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label for="authors"
+			class="col-sm-3 offset-sm-1 col-form-label text-right">AUTHORS</label>
+		<div class="col-sm-6">
+			<select multiple name="authors" class="form-control" data-ng-model="book.authors"
+				data-ng-options="author.name | capitalize for author in authors"
+				required>
+			</select>
+			<div data-ng-show="form.authors.$dirty && form.authors.$invalid" class="text-danger">
+				<span data-ng-show="form.authors.$error.required">Please select an authors</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label for="file"
+			class="col-sm-3 offset-sm-1 col-form-label text-right">FILE</label>
+		<div class="col-sm-6">
+			<input name="file" type="file" class="form-control" accept="application/pdf"
+				onchange="angular.element(this).scope().fileChanged(this)">
+			<div data-ng-show="form.file.$dirty && form.file.$invalid" class="text-danger">
+				<span data-ng-show="form.file.$error.required">Please select a file</span>
+			</div>
+		</div>
+	</div>
+	
+	<div class="form-group row ">
+		<div class="col-sm-6 offset-sm-4">
+			<button type="submit" class="btn btn-primary" data-ng-disabled="form.$invalid">Save</button>
+			<a class="btn btn-secondary" href="#!/books-form/">Reset</a>
+		</div>
+	</div>
+</form>
+<br>
+<br>

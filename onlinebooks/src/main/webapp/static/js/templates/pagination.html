@@ -1,0 +1,13 @@
+<nav data-ng-show="numbers.length > 0">
+	<ul class="pagination">
+		<li
+			data-ng-class="{'page-item' : true, 'disabled' : currentPage <= 0}"><a
+			class="page-link" href="{{url}}/{{+ currentPage - 1}}/{{pageSize}}">Previous</a></li>
+		<li data-ng-repeat="number in numbers"
+			data-ng-class="{'page-item' : true, 'active' : currentPage == number}"><a
+			class="page-link" href="{{url}}/{{number}}/{{pageSize}}">{{number + 1}}</a></li>
+		<li
+			data-ng-class="{'page-item' : true, 'disabled' : currentPage >= + totalPages - 1}"><a
+			class="page-link" href="{{url}}/{{+ currentPage + 1}}/{{pageSize}}">Next</a></li>
+	</ul>
+</nav>

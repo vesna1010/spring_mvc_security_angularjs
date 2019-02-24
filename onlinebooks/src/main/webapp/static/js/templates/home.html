@@ -1,0 +1,53 @@
+<br>
+
+<div class="row">
+	<div class="col-sm-3">
+		<select class="form-control" data-ng-model="categoryId"
+			data-ng-change="booksByCategory(categoryId)">
+			<option value="">Select Category</option>
+			<option data-ng-repeat="category in categories"
+				value="{{category.id}}">{{category.name}}</option>
+
+		</select>
+	</div>
+
+	<div class="col-sm-3">
+		<select class="form-control" data-ng-model="language"
+			data-ng-options="language for language in languages"
+			data-ng-change="booksByLanguage(language)">
+			<option value="">Select Language</option>
+		</select>
+	</div>
+
+	<div class="col-sm-3">
+		<input type="text" class="form-control" placeholder="Title of book"
+			data-ng-model="title" data-ng-change="booksByTitle(title)">
+	</div>
+
+	<div class="col-sm-3">
+		<input type="text" class="form-control" placeholder="Name of author"
+			data-ng-model="name" data-ng-change="booksByAuthorName(name)">
+	</div>
+</div>
+
+<div data-ng-repeat="book in books" class="row">
+	<div class="col-sm-6">
+		<br>
+		<div>{{book.title}}</div>
+		<div data-ng-repeat="author in book.authors">{{author.name}}</div>
+		<br> <img class="img"
+			data-ng-src="data:image/JPEG;base64, {{book.image}}" /><br> <br>
+		<button class="btn btn-success"
+			data-ng-click="downloadBook(book.isbn, book.title)">Download</button>
+		<br>
+	</div>
+	<hr>
+</div>
+
+<div class="row">
+	<div class="col-sm-6 offset-sm-3">
+		<br> <br>
+		<pagination total-pages="{{totalPages}}"
+			current-page="{{currentPage}}" page-size="{{pageSize}}" url="{{url}}"></pagination>
+	</div>
+</div>

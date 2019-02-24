@@ -1,0 +1,33 @@
+<br>
+<h5 class="text-center">Categories</h5>
+<br>
+
+<div class="table-responsive">
+	<table class="table table-striped table-bordered">
+		<thead>
+			<tr class="table-success">
+				<th>ID</th>
+				<th>NAME</th>
+				<th>MANAGE</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr data-ng-hide="categories.length">
+				<td colspan="3" class="text-center">No Data</td>
+			</tr>
+			<tr data-ng-repeat="category in categories">
+				<td>{{category.id}}</td>
+				<td>{{category.name}}</td>
+				<td><a class="btn btn-primary" href="#!/categories-form/{{category.id}}">Edit</a>
+					<button class="btn btn-danger" data-ng-click="deleteCategoryById(category.id)">Delete</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<br>
+<br>
+<pagination total-pages="{{totalPages}}" current-page="{{currentPage}}"
+	page-size="{{pageSize}}" url='#!/categories-page'></pagination>
+<br>
+<br>

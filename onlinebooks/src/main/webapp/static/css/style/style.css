@@ -1,0 +1,30 @@
+@CHARSET "UTF-8";
+
+.container {
+	min-width: 100%;
+}
+
+.header {
+	background-color: #4b0082;
+	color: white;
+	text-align:center;
+	height: 80px;
+}
+
+input.ng-dirty.ng-valid {
+	color: green;
+}
+
+input.ng-dirty.ng-invalid {
+	color: red;
+}
+
+img {
+	width : 40px;
+	height: 40px;
+}
+
+.img {
+	width : 200px;
+	height: 250px;
+}
