@@ -60,9 +60,7 @@ public class AuthorsControllerTest extends BaseControllerTest {
 	public void findAllAuthorsWithAnonymousUserTest() throws Exception {
 		when(service.findAllAuthors(sort)).thenReturn(Arrays.asList(author1, author2));
 
-		mockMvc.perform(
-				get("/authors")
-				)
+		mockMvc.perform(get("/authors"))
 		       .andExpect(status().isUnauthorized());
 
 		verify(service, times(0)).findAllAuthors(sort);
@@ -73,9 +71,7 @@ public class AuthorsControllerTest extends BaseControllerTest {
 	public void findAllAuthorsWithAuthenticatedUserTest() throws Exception {
 		when(service.findAllAuthors(sort)).thenReturn(Arrays.asList(author1, author2));
 
-		mockMvc.perform(
-				get("/authors")
-				)
+		mockMvc.perform(get("/authors"))
 		       .andExpect(status().isOk())
 		       .andExpect(content().contentType("application/json;charset=UTF-8"))
 		       .andExpect(jsonPath("$", hasSize(2)))
@@ -90,10 +86,8 @@ public class AuthorsControllerTest extends BaseControllerTest {
 		when(service.findAuthorsByPage(pageable)).thenReturn(
 				new PageImpl<Author>(Arrays.asList(author1, author2), pageable, 2));
 
-		mockMvc.perform(
-				get("/authors/page")
-				)
-			   .andExpect(status().isUnauthorized());
+		mockMvc.perform(get("/authors/page"))
+		       .andExpect(status().isUnauthorized());
 
 		verify(service, times(0)).findAuthorsByPage(pageable);
 	}
@@ -104,9 +98,7 @@ public class AuthorsControllerTest extends BaseControllerTest {
 		when(service.findAuthorsByPage(pageable)).thenReturn(
 				new PageImpl<Author>(Arrays.asList(author1, author2), pageable, 2));
 
-		mockMvc.perform(
-				get("/authors/page")
-				)
+		mockMvc.perform(get("/authors/page"))
 		       .andExpect(status().isOk())
 		       .andExpect(content().contentType("application/json;charset=UTF-8"))
 		       .andExpect(jsonPath("$.content", hasSize(2)))
@@ -123,9 +115,7 @@ public class AuthorsControllerTest extends BaseControllerTest {
 	@WithAnonymousUser
 	public void authorWithAnonymousUserTest() throws Exception {
 
-		mockMvc.perform(
-				get("/authors/new")
-				)
+		mockMvc.perform(get("/authors/new"))
 		       .andExpect(status().isUnauthorized());
 	}
 
@@ -133,9 +123,7 @@ public class AuthorsControllerTest extends BaseControllerTest {
 	@WithMockUser(authorities = "USER")
 	public void authorWithAuthenticatedUserTest() throws Exception {
 
-		mockMvc.perform(
-				get("/authors/new")
-				)
+		mockMvc.perform(get("/authors/new"))
 		       .andExpect(status().isOk())
 		       .andExpect(content().contentType("application/json;charset=UTF-8"))
 		       .andExpect(jsonPath("$.id", is(nullValue())))
@@ -149,9 +137,7 @@ public class AuthorsControllerTest extends BaseControllerTest {
 	public void findAuthorByIdWithAnonymousUserTest() throws Exception {
 		when(service.findAuthorById(1L)).thenReturn(author1);
 
-		mockMvc.perform(
-				get("/authors/1")
-				)
+		mockMvc.perform(get("/authors/1"))
 		       .andExpect(status().isUnauthorized());
 
 		verify(service, times(0)).findAuthorById(1L);
@@ -162,9 +148,7 @@ public class AuthorsControllerTest extends BaseControllerTest {
 	public void findAuthorByIdWithAuthenticatedUserTest() throws Exception {
 		when(service.findAuthorById(1L)).thenReturn(author1);
 
-		mockMvc.perform(
-				get("/authors/1")
-				)
+		mockMvc.perform(get("/authors/1"))
 		       .andExpect(status().isOk())
 		       .andExpect(content().contentType("application/json;charset=UTF-8"))
 		       .andExpect(jsonPath("$.name", is("Author A")))
@@ -179,9 +163,7 @@ public class AuthorsControllerTest extends BaseControllerTest {
 	public void findAuthorByIdWithExceptionTest() throws Exception {
 		when(service.findAuthorById(1L)).thenThrow(new ResourceNotFoundException("No author found with id 1"));
 
-		mockMvc.perform(
-				get("/authors/1")
-				)
+		mockMvc.perform(get("/authors/1"))
 		       .andExpect(status().is4xxClientError())
 		       .andExpect(content().contentType("application/json;charset=UTF-8"))
 		       .andExpect(jsonPath("$.message", is("No author found with id 1")));
@@ -226,9 +208,7 @@ public class AuthorsControllerTest extends BaseControllerTest {
 	public void deleteAuthorByIdWithAnonymousUserTest() throws Exception {
 		doNothing().when(service).deleteAuthorById(1L);
 
-		mockMvc.perform(
-				delete("/authors/1")
-				)
+		mockMvc.perform(delete("/authors/1"))
 		       .andExpect(status().isUnauthorized());
 
 		verify(service, times(0)).deleteAuthorById(1L);
@@ -239,9 +219,7 @@ public class AuthorsControllerTest extends BaseControllerTest {
 	public void deleteAuthorByIdWithAuthenticatedUserTest() throws Exception {
 		doNothing().when(service).deleteAuthorById(1L);
 
-		mockMvc.perform(
-				delete("/authors/1")
-				)
+		mockMvc.perform(delete("/authors/1"))
 		       .andExpect(status().isOk());
 
 		verify(service, times(1)).deleteAuthorById(1L);
