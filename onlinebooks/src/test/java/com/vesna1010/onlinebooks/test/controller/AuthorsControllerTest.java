@@ -77,10 +77,10 @@ public class AuthorsControllerTest extends BaseControllerTest {
 				get("/authors")
 				)
 		       .andExpect(status().isOk())
-			   .andExpect(content().contentType("application/json;charset=UTF-8"))
-			   .andExpect(jsonPath("$", hasSize(2)))
-			   .andExpect(jsonPath("$[0].name", is("Author A")))
-			   .andExpect(jsonPath("$[1].name", is("Author B")));
+		       .andExpect(content().contentType("application/json;charset=UTF-8"))
+		       .andExpect(jsonPath("$", hasSize(2)))
+		       .andExpect(jsonPath("$[0].name", is("Author A")))
+		       .andExpect(jsonPath("$[1].name", is("Author B")));
 
 		verify(service, times(1)).findAllAuthors(sort);
 	}
@@ -107,14 +107,14 @@ public class AuthorsControllerTest extends BaseControllerTest {
 		mockMvc.perform(
 				get("/authors/page")
 				)
-			   .andExpect(status().isOk())
-			   .andExpect(content().contentType("application/json;charset=UTF-8"))
-			   .andExpect(jsonPath("$.content", hasSize(2)))
-			   .andExpect(jsonPath("$.content[0].name", is("Author A")))
-			   .andExpect(jsonPath("$.content[1].name", is("Author B")))
-			   .andExpect(jsonPath("$.totalPages", is(1)))
-			   .andExpect(jsonPath("$.number", is(0)))
-			   .andExpect(jsonPath("$.size", is(10)));
+		       .andExpect(status().isOk())
+		       .andExpect(content().contentType("application/json;charset=UTF-8"))
+		       .andExpect(jsonPath("$.content", hasSize(2)))
+		       .andExpect(jsonPath("$.content[0].name", is("Author A")))
+		       .andExpect(jsonPath("$.content[1].name", is("Author B")))
+		       .andExpect(jsonPath("$.totalPages", is(1)))
+		       .andExpect(jsonPath("$.number", is(0)))
+		       .andExpect(jsonPath("$.size", is(10)));
 
 		verify(service, times(1)).findAuthorsByPage(pageable);
 	}
@@ -137,11 +137,11 @@ public class AuthorsControllerTest extends BaseControllerTest {
 				get("/authors/new")
 				)
 		       .andExpect(status().isOk())
-			   .andExpect(content().contentType("application/json;charset=UTF-8"))
-			   .andExpect(jsonPath("$.id", is(nullValue())))
-			   .andExpect(jsonPath("$.name", is(nullValue())))
-			   .andExpect(jsonPath("$.email", is(nullValue())))
-               .andExpect(jsonPath("$.yearOfBirth", is(nullValue())));
+		       .andExpect(content().contentType("application/json;charset=UTF-8"))
+		       .andExpect(jsonPath("$.id", is(nullValue())))
+		       .andExpect(jsonPath("$.name", is(nullValue())))
+		       .andExpect(jsonPath("$.email", is(nullValue())))
+                       .andExpect(jsonPath("$.yearOfBirth", is(nullValue())));
 	}
 
 	@Test
@@ -166,10 +166,10 @@ public class AuthorsControllerTest extends BaseControllerTest {
 				get("/authors/1")
 				)
 		       .andExpect(status().isOk())
-			   .andExpect(content().contentType("application/json;charset=UTF-8"))
-			   .andExpect(jsonPath("$.name", is("Author A")))
-			   .andExpect(jsonPath("$.email", is("authorA@gmail.com")))
-			   .andExpect(jsonPath("$.yearOfBirth", is(1965)));
+		       .andExpect(content().contentType("application/json;charset=UTF-8"))
+		       .andExpect(jsonPath("$.name", is("Author A")))
+		       .andExpect(jsonPath("$.email", is("authorA@gmail.com")))
+		       .andExpect(jsonPath("$.yearOfBirth", is(1965)));
 
 		verify(service, times(1)).findAuthorById(1L);
 	}
@@ -183,8 +183,8 @@ public class AuthorsControllerTest extends BaseControllerTest {
 				get("/authors/1")
 				)
 		       .andExpect(status().is4xxClientError())
-			   .andExpect(content().contentType("application/json;charset=UTF-8"))
-			   .andExpect(jsonPath("$.message", is("No author found with id 1")));
+		       .andExpect(content().contentType("application/json;charset=UTF-8"))
+		       .andExpect(jsonPath("$.message", is("No author found with id 1")));
 
 		verify(service, times(1)).findAuthorById(1L);
 	}
@@ -216,7 +216,7 @@ public class AuthorsControllerTest extends BaseControllerTest {
 				)
 		       .andExpect(status().isOk())
 		       .andExpect(content().contentType("text/plain;charset=ISO-8859-1"))
-			   .andExpect(jsonPath("$", is("Saved " + author1)));
+		       .andExpect(jsonPath("$", is("Saved " + author1)));
 
 		verify(service, times(1)).saveAuthor(author1);
 	}
