@@ -26,7 +26,7 @@ public class AuthenticationControllerTest extends BaseControllerTest {
 	public void findLoggedUserWithAuthenticatedUserTest() throws Exception {
 		
 		mockMvc.perform(get("/authenticated"))
-	               .andExpect(status().isOk())
+		       .andExpect(status().isOk())
 		       .andExpect(content().contentType("application/json;charset=utf-8"))
 		       .andExpect(jsonPath("$", is(Boolean.TRUE)));
 	}
