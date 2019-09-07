@@ -56,10 +56,8 @@ public class UsersControllerTest extends BaseControllerTest {
 		when(service.findUsersByPage(pageable)).thenReturn(
 				new PageImpl<User>(Arrays.asList(user1, user2), pageable, 2));
 
-		mockMvc.perform(
-				get("/users")
-				)
-			   .andExpect(status().isUnauthorized());
+		mockMvc.perform(get("/users"))
+		       .andExpect(status().isUnauthorized());
 
 		verify(service, times(0)).findUsersByPage(pageable);
 	}
@@ -70,10 +68,8 @@ public class UsersControllerTest extends BaseControllerTest {
 		when(service.findUsersByPage(pageable)).thenReturn(
 				new PageImpl<User>(Arrays.asList(user1, user2), pageable, 2));
 		
-		mockMvc.perform(
-				get("/users")
-				)
-			  .andExpect(status().isForbidden());
+		mockMvc.perform(get("/users"))
+		       .andExpect(status().isForbidden());
 
 		verify(service, times(0)).findUsersByPage(pageable);
 	}
@@ -84,17 +80,15 @@ public class UsersControllerTest extends BaseControllerTest {
 		when(service.findUsersByPage(pageable)).thenReturn(
 				new PageImpl<User>(Arrays.asList(user1, user2), pageable, 2));
 		
-		mockMvc.perform(
-				get("/users")
-				)
-			   .andExpect(status().isOk())
-			   .andExpect(content().contentType("application/json;charset=UTF-8"))
-			   .andExpect(jsonPath("$.content", hasSize(2)))
-			   .andExpect(jsonPath("$.content[0].username", is("UsernameA")))
-			   .andExpect(jsonPath("$.content[1].username", is("UsernameB")))
-			   .andExpect(jsonPath("$.totalPages", is(1)))
-			   .andExpect(jsonPath("$.number", is(0)))
-			   .andExpect(jsonPath("$.size", is(10)));
+		mockMvc.perform(get("/users"))
+		       .andExpect(status().isOk())
+		       .andExpect(content().contentType("application/json;charset=UTF-8"))
+		       .andExpect(jsonPath("$.content", hasSize(2)))
+		       .andExpect(jsonPath("$.content[0].username", is("UsernameA")))
+	               .andExpect(jsonPath("$.content[1].username", is("UsernameB")))
+		       .andExpect(jsonPath("$.totalPages", is(1)))
+		       .andExpect(jsonPath("$.number", is(0)))
+		       .andExpect(jsonPath("$.size", is(10)));
 
 		verify(service, times(1)).findUsersByPage(pageable);
 	}
@@ -103,9 +97,7 @@ public class UsersControllerTest extends BaseControllerTest {
 	@WithAnonymousUser
 	public void userWithAnonymousUserTest() throws Exception {
 
-		mockMvc.perform(
-				get("/users/new")
-				)
+		mockMvc.perform(get("/users/new"))
 		       .andExpect(status().isUnauthorized());
 	}
 
@@ -113,9 +105,7 @@ public class UsersControllerTest extends BaseControllerTest {
 	@WithMockUser(authorities = "USER")
 	public void userWithUserTest() throws Exception {
 
-		mockMvc.perform(
-				get("/users/new")
-				)
+		mockMvc.perform(get("/users/new"))
 		       .andExpect(status().isForbidden());
 	}
 
@@ -123,15 +113,13 @@ public class UsersControllerTest extends BaseControllerTest {
 	@WithMockUser(authorities = "ADMIN")
 	public void userWithAdminTest() throws Exception {
 
-		mockMvc.perform(
-				get("/users/new")
-				)
+		mockMvc.perform(get("/users/new"))
 		       .andExpect(status().isOk())
-			   .andExpect(content().contentType("application/json;charset=UTF-8"))
-			   .andExpect(jsonPath("$.username", is(nullValue())))
-			   .andExpect(jsonPath("$.authority", is(nullValue())))
-			   .andExpect(jsonPath("$.email", is(nullValue())))
-			   .andExpect(jsonPath("$.enabled", is(Boolean.TRUE)));
+		       .andExpect(content().contentType("application/json;charset=UTF-8"))
+		       .andExpect(jsonPath("$.username", is(nullValue())))
+		       .andExpect(jsonPath("$.authority", is(nullValue())))
+		       .andExpect(jsonPath("$.email", is(nullValue())))
+		       .andExpect(jsonPath("$.enabled", is(Boolean.TRUE)));
 	}
 
 	@Test
@@ -160,8 +148,8 @@ public class UsersControllerTest extends BaseControllerTest {
 				.content(new ObjectMapper().writeValueAsString(user1))
 				)
 		       .andExpect(status().isOk())
-			   .andExpect(content().contentType("text/plain;charset=ISO-8859-1"))
-			   .andExpect(jsonPath("$", is("Saved " + user1)));
+		       .andExpect(content().contentType("text/plain;charset=ISO-8859-1"))
+		       .andExpect(jsonPath("$", is("Saved " + user1)));
 
 		verify(service, times(1)).saveUser(user1);
 	}
@@ -171,9 +159,7 @@ public class UsersControllerTest extends BaseControllerTest {
 	public void deleteUserByUsernameWithAnonymousUserTest() throws Exception {
 		doNothing().when(service).deleteUserByUsername("UsernameA");
 
-		mockMvc.perform(
-				delete("/users/UsernameA")
-				)
+		mockMvc.perform(delete("/users/UsernameA"))
 		       .andExpect(status().isUnauthorized());
 
 		verify(service, times(0)).deleteUserByUsername("UsernameA");
@@ -184,9 +170,7 @@ public class UsersControllerTest extends BaseControllerTest {
 	public void deleteUserByUsernameWithUserTest() throws Exception {
 		doNothing().when(service).deleteUserByUsername("UsernameA");
 
-		mockMvc.perform(
-				delete("/users/UsernameA")
-				)
+		mockMvc.perform(delete("/users/UsernameA"))
 		       .andExpect(status().isForbidden());
 
 		verify(service, times(0)).deleteUserByUsername("UsernameA");
@@ -197,9 +181,7 @@ public class UsersControllerTest extends BaseControllerTest {
 	public void deleteUserByUsernameWithAdminTest() throws Exception {
 		doNothing().when(service).deleteUserByUsername("UsernameA");
 
-		mockMvc.perform(
-				delete("/users/UsernameA")
-				)
+		mockMvc.perform(delete("/users/UsernameA"))
 		       .andExpect(status().isOk());
 
 		verify(service, times(1)).deleteUserByUsername("UsernameA");
@@ -210,9 +192,7 @@ public class UsersControllerTest extends BaseControllerTest {
 	public void disableUserByUsernameWithAnonymousUserTest() throws Exception {
 		doNothing().when(service).disableUserByUsername("UsernameA");
 
-		mockMvc.perform(
-				put("/users/UsernameA")
-				)
+		mockMvc.perform(put("/users/UsernameA"))
 		       .andExpect(status().isUnauthorized());
 
 		verify(service, times(0)).disableUserByUsername("UsernameA");
@@ -223,9 +203,7 @@ public class UsersControllerTest extends BaseControllerTest {
 	public void disableUserByUsernameWithUserTest() throws Exception {
 		doNothing().when(service).disableUserByUsername("UsernameA");
 
-		mockMvc.perform(
-				put("/users/UsernameA")
-				)
+		mockMvc.perform(put("/users/UsernameA"))
 		       .andExpect(status().isForbidden());
 
 		verify(service, times(0)).disableUserByUsername("UsernameA");
@@ -236,9 +214,7 @@ public class UsersControllerTest extends BaseControllerTest {
 	public void disableUserByUsernameWithAdminTest() throws Exception {
 		doNothing().when(service).disableUserByUsername("UsernameA");
 
-		mockMvc.perform(
-				put("/users/UsernameA")
-				)
+		mockMvc.perform(put("/users/UsernameA"))
 		       .andExpect(status().isOk());
 
 		verify(service, times(1)).disableUserByUsername("UsernameA");
