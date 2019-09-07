@@ -77,17 +77,15 @@ public class BooksControllerTest extends BaseControllerTest {
 		when(service.findBooksByPage(pageable)).thenReturn(
 				new PageImpl<Book>(Arrays.asList(book1, book2), pageable, 2));
 		
-		mockMvc.perform(
-				get("/books")
-				)
+		mockMvc.perform(get("/books"))
 		       .andExpect(status().isOk())
-			   .andExpect(content().contentType("application/json;charset=UTF-8"))
-			   .andExpect(jsonPath("$.content", hasSize(2)))
-			   .andExpect(jsonPath("$.content[0].title", is("Title A")))
-			   .andExpect(jsonPath("$.content[1].title", is("Title B")))
-			   .andExpect(jsonPath("$.totalPages", is(1)))
-			   .andExpect(jsonPath("$.number", is(0)))
-			   .andExpect(jsonPath("$.size", is(10)));
+		       .andExpect(content().contentType("application/json;charset=UTF-8"))
+		       .andExpect(jsonPath("$.content", hasSize(2)))
+		       .andExpect(jsonPath("$.content[0].title", is("Title A")))
+		       .andExpect(jsonPath("$.content[1].title", is("Title B")))
+		       .andExpect(jsonPath("$.totalPages", is(1)))
+		       .andExpect(jsonPath("$.number", is(0)))
+		       .andExpect(jsonPath("$.size", is(10)));
 
 		verify(service, times(1)).findBooksByPage(pageable);
 	}
@@ -98,17 +96,15 @@ public class BooksControllerTest extends BaseControllerTest {
 		when(service.findBooksByTitleAndPage("Title", pageable)).thenReturn(
 				new PageImpl<Book>(Arrays.asList(book1, book2), pageable, 2));
 
-		mockMvc.perform(
-				get("/books/title/Title")
-				)
+		mockMvc.perform(get("/books/title/Title"))
 		       .andExpect(status().isOk())
-			   .andExpect(content().contentType("application/json;charset=UTF-8"))
-			   .andExpect(jsonPath("$.content", hasSize(2)))
-			   .andExpect(jsonPath("$.content[0].title", is("Title A")))
-			   .andExpect(jsonPath("$.content[1].title", is("Title B")))
-			   .andExpect(jsonPath("$.totalPages", is(1)))
-			   .andExpect(jsonPath("$.number", is(0)))
-			   .andExpect(jsonPath("$.size", is(10)));
+		       .andExpect(content().contentType("application/json;charset=UTF-8"))
+		       .andExpect(jsonPath("$.content", hasSize(2)))
+		       .andExpect(jsonPath("$.content[0].title", is("Title A")))
+		       .andExpect(jsonPath("$.content[1].title", is("Title B")))
+		       .andExpect(jsonPath("$.totalPages", is(1)))
+		       .andExpect(jsonPath("$.number", is(0)))
+		       .andExpect(jsonPath("$.size", is(10)));
 
 		verify(service, times(1)).findBooksByTitleAndPage("Title", pageable);
 	}
@@ -119,17 +115,15 @@ public class BooksControllerTest extends BaseControllerTest {
 		when(service.findBooksByAuthorNameAndPage("Author", pageable)).thenReturn(
 				new PageImpl<Book>(Arrays.asList(book1, book2), pageable, 2));
 	
-		mockMvc.perform(
-				get("/books/author/Author")
-				)
+		mockMvc.perform(get("/books/author/Author"))
 		       .andExpect(status().isOk())
-			   .andExpect(content().contentType("application/json;charset=UTF-8"))
-			   .andExpect(jsonPath("$.content", hasSize(2)))
-			   .andExpect(jsonPath("$.content[0].title", is("Title A")))
-			   .andExpect(jsonPath("$.content[1].title", is("Title B")))
-			   .andExpect(jsonPath("$.totalPages", is(1)))
-			   .andExpect(jsonPath("$.number", is(0)))
-			   .andExpect(jsonPath("$.size", is(10)));
+		       .andExpect(content().contentType("application/json;charset=UTF-8"))
+		       .andExpect(jsonPath("$.content", hasSize(2)))
+		       .andExpect(jsonPath("$.content[0].title", is("Title A")))
+		       .andExpect(jsonPath("$.content[1].title", is("Title B")))
+		       .andExpect(jsonPath("$.totalPages", is(1)))
+		       .andExpect(jsonPath("$.number", is(0)))
+		       .andExpect(jsonPath("$.size", is(10)));
 
 		verify(service, times(1)).findBooksByAuthorNameAndPage("Author", pageable);
 	}
@@ -140,17 +134,15 @@ public class BooksControllerTest extends BaseControllerTest {
 		when(service.findBooksByCategoryIdAndPage(1L, pageable)).thenReturn(
 				new PageImpl<Book>(Arrays.asList(book1, book2), pageable, 2));
 
-		mockMvc.perform(
-				get("/books/category/1")
-				)
+		mockMvc.perform(get("/books/category/1"))
 		       .andExpect(status().isOk())
-			   .andExpect(content().contentType("application/json;charset=UTF-8"))
-			   .andExpect(jsonPath("$.content", hasSize(2)))
-			   .andExpect(jsonPath("$.content[0].title", is("Title A")))
-			   .andExpect(jsonPath("$.content[1].title", is("Title B")))
-			   .andExpect(jsonPath("$.totalPages", is(1)))
-			   .andExpect(jsonPath("$.number", is(0)))
-			   .andExpect(jsonPath("$.size", is(10)));
+		       .andExpect(content().contentType("application/json;charset=UTF-8"))
+		       .andExpect(jsonPath("$.content", hasSize(2)))
+		       .andExpect(jsonPath("$.content[0].title", is("Title A")))
+		       .andExpect(jsonPath("$.content[1].title", is("Title B")))
+		       .andExpect(jsonPath("$.totalPages", is(1)))
+		       .andExpect(jsonPath("$.number", is(0)))
+		       .andExpect(jsonPath("$.size", is(10)));
 
 		verify(service, times(1)).findBooksByCategoryIdAndPage(1L, pageable);
 	}
@@ -161,17 +153,15 @@ public class BooksControllerTest extends BaseControllerTest {
 		when(service.findBooksByLanguageAndPage(Language.ENGLISH, pageable)).thenReturn(
 				new PageImpl<Book>(Arrays.asList(book1, book2), pageable, 2));
 	
-		mockMvc.perform(
-				get("/books/language/ENGLISH")
-				)
-			   .andExpect(status().isOk())
-			   .andExpect(content().contentType("application/json;charset=UTF-8"))
-			   .andExpect(jsonPath("$.content", hasSize(2)))
-			   .andExpect(jsonPath("$.content[0].title", is("Title A")))
-			   .andExpect(jsonPath("$.content[1].title", is("Title B")))
-			   .andExpect(jsonPath("$.totalPages", is(1)))
-			   .andExpect(jsonPath("$.number", is(0)))
-			   .andExpect(jsonPath("$.size", is(10)));
+		mockMvc.perform(get("/books/language/ENGLISH"))
+		       .andExpect(status().isOk())
+		       .andExpect(content().contentType("application/json;charset=UTF-8"))
+		       .andExpect(jsonPath("$.content", hasSize(2)))
+		       .andExpect(jsonPath("$.content[0].title", is("Title A")))
+		       .andExpect(jsonPath("$.content[1].title", is("Title B")))
+		       .andExpect(jsonPath("$.totalPages", is(1)))
+		       .andExpect(jsonPath("$.number", is(0)))
+		       .andExpect(jsonPath("$.size", is(10)));
 
 		verify(service, times(1)).findBooksByLanguageAndPage(Language.ENGLISH, pageable);
 	}
@@ -182,9 +172,7 @@ public class BooksControllerTest extends BaseControllerTest {
 		when(service.findBooksByPage(pageable1)).thenReturn(
 				new PageImpl<Book>(Arrays.asList(book1, book2), pageable1, 2));
 		
-		mockMvc.perform(
-				get("/books/page")
-				)
+		mockMvc.perform(get("/books/page"))
 		       .andExpect(status().isUnauthorized());
 
 		verify(service, times(0)).findBooksByPage(pageable);
@@ -196,17 +184,15 @@ public class BooksControllerTest extends BaseControllerTest {
 		when(service.findBooksByPage(pageable1)).thenReturn(
 				new PageImpl<Book>(Arrays.asList(book1, book2), pageable1, 2));
 		
-		mockMvc.perform(
-				get("/books/page")
-				)
+		mockMvc.perform(get("/books/page"))
 		       .andExpect(status().isOk())
-			   .andExpect(content().contentType("application/json;charset=UTF-8"))
-			   .andExpect(jsonPath("$.content", hasSize(2)))
-			   .andExpect(jsonPath("$.content[0].title", is("Title A")))
-			   .andExpect(jsonPath("$.content[1].title", is("Title B")))
-			   .andExpect(jsonPath("$.totalPages", is(1)))
-			   .andExpect(jsonPath("$.number", is(0)))
-			   .andExpect(jsonPath("$.size", is(10)));
+		       .andExpect(content().contentType("application/json;charset=UTF-8"))
+		       .andExpect(jsonPath("$.content", hasSize(2)))
+		       .andExpect(jsonPath("$.content[0].title", is("Title A")))
+		       .andExpect(jsonPath("$.content[1].title", is("Title B")))
+		       .andExpect(jsonPath("$.totalPages", is(1)))
+		       .andExpect(jsonPath("$.number", is(0)))
+		       .andExpect(jsonPath("$.size", is(10)));
 
 		verify(service, times(1)).findBooksByPage(pageable1);
 	}
@@ -215,9 +201,7 @@ public class BooksControllerTest extends BaseControllerTest {
 	@WithAnonymousUser
 	public void bookWithAnonymousUserTest() throws Exception {
 		
-		mockMvc.perform(
-				get("/books/new")
-				)
+		mockMvc.perform(get("/books/new"))
 		       .andExpect(status().isUnauthorized());
 	}
 
@@ -225,15 +209,13 @@ public class BooksControllerTest extends BaseControllerTest {
 	@WithMockUser(authorities = "USER")
 	public void bookWithAuthenticatedUserTest() throws Exception {
 		
-		mockMvc.perform(
-				get("/books/new")
-				)
+		mockMvc.perform(get("/books/new"))
 		       .andExpect(status().isOk())
-			   .andExpect(content().contentType("application/json;charset=UTF-8"))
-			   .andExpect(jsonPath("$.title", is(nullValue())))
-			   .andExpect(jsonPath("$.language", is(nullValue())))
-			   .andExpect(jsonPath("$.category", is(nullValue())))
-			   .andExpect(jsonPath("$.authors", hasSize(0)));
+		       .andExpect(content().contentType("application/json;charset=UTF-8"))
+		       .andExpect(jsonPath("$.title", is(nullValue())))
+		       .andExpect(jsonPath("$.language", is(nullValue())))
+		       .andExpect(jsonPath("$.category", is(nullValue())))
+	               .andExpect(jsonPath("$.authors", hasSize(0)));
 	}
 	
 	@Test
@@ -241,9 +223,7 @@ public class BooksControllerTest extends BaseControllerTest {
 	public void findBookByIsbnWithAnonymousUserTest() throws Exception {
 		when(service.findBookByIsbn("1234567890121")).thenReturn(book1);
 
-		mockMvc.perform(
-				get("/books/1234567890121")
-				)
+		mockMvc.perform(get("/books/1234567890121"))
 		       .andExpect(status().isUnauthorized());
 
 		verify(service, times(0)).findBookByIsbn("1234567890121");
@@ -254,15 +234,13 @@ public class BooksControllerTest extends BaseControllerTest {
 	public void findBookByIsbnWithAuthenticatedUserTest() throws Exception {
 		when(service.findBookByIsbn("1234567890121")).thenReturn(book1);
 
-		mockMvc.perform(
-				get("/books/1234567890121")
-				)
+		mockMvc.perform(get("/books/1234567890121"))
 		       .andExpect(status().isOk())
-			   .andExpect(content().contentType("application/json;charset=UTF-8"))
-			   .andExpect(jsonPath("$.title", is("Title A")))
-			   .andExpect(jsonPath("$.language", is("ENGLISH")))
-			   .andExpect(jsonPath("$.category.name", is("Category")))
-			   .andExpect(jsonPath("$.authors", hasSize(1)));
+		       .andExpect(content().contentType("application/json;charset=UTF-8"))
+		       .andExpect(jsonPath("$.title", is("Title A")))
+		       .andExpect(jsonPath("$.language", is("ENGLISH")))
+		       .andExpect(jsonPath("$.category.name", is("Category")))
+		       .andExpect(jsonPath("$.authors", hasSize(1)));
 
 		verify(service, times(1)).findBookByIsbn("1234567890121");
 	}
@@ -273,12 +251,10 @@ public class BooksControllerTest extends BaseControllerTest {
 		when(service.findBookByIsbn("1234567890121")).thenThrow(
 				new ResourceNotFoundException("No book found with isbn 1234567890121"));
 		
-		mockMvc.perform(
-				get("/books/1234567890121")
-				)
+		mockMvc.perform(get("/books/1234567890121"))
 		       .andExpect(status().is4xxClientError())
-	           .andExpect(content().contentType("application/json;charset=UTF-8"))
-	           .andExpect(jsonPath("$.message", is("No book found with isbn 1234567890121")));
+	               .andExpect(content().contentType("application/json;charset=UTF-8"))
+	               .andExpect(jsonPath("$.message", is("No book found with isbn 1234567890121")));
 
 		verify(service, times(1)).findBookByIsbn("1234567890121");
 	}
@@ -320,10 +296,8 @@ public class BooksControllerTest extends BaseControllerTest {
 	public void downloadBookByIsbnWithAnonymousUserTest() throws Exception {
 		when(service.findBookByIsbn("1234567890121")).thenReturn(book1);
 		
-		mockMvc.perform(
-				get("/books/download/1234567890121")
-				)
-	           .andExpect(status().isOk())
+		mockMvc.perform(get("/books/download/1234567890121"))
+	               .andExpect(status().isOk())
 		       .andExpect(content().contentType("application/octet-stream"));
 
 		verify(service, times(1)).findBookByIsbn("1234567890121");
@@ -334,9 +308,7 @@ public class BooksControllerTest extends BaseControllerTest {
 	public void deleteBookByIdWithAnonymousUserTest() throws Exception {
 		doNothing().when(service).deleteBookByIsbn("1234567890121");
 
-		mockMvc.perform(
-				delete("/books/1234567890121")
-				)
+		mockMvc.perform(delete("/books/1234567890121"))
 		       .andExpect(status().isUnauthorized());
 
 		verify(service, times(0)).deleteBookByIsbn("1234567890121");
@@ -347,9 +319,7 @@ public class BooksControllerTest extends BaseControllerTest {
 	public void deleteBookByIdWithAuthenticatedUserTest() throws Exception {
 		doNothing().when(service).deleteBookByIsbn("1234567890121");
 
-		mockMvc.perform(
-				delete("/books/1234567890121")
-				)
+		mockMvc.perform(delete("/books/1234567890121"))
 		       .andExpect(status().isOk());
 
 		verify(service, times(1)).deleteBookByIsbn("1234567890121");
