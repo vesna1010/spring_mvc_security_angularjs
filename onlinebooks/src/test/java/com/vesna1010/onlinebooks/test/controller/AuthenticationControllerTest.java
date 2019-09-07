@@ -17,8 +17,8 @@ public class AuthenticationControllerTest extends BaseControllerTest {
 	public void findLoggedUserWithAnonymousUserTest() throws Exception {
 		mockMvc.perform(get("/authenticated"))
 		       .andExpect(status().isOk())
-			   .andExpect(content().contentType("application/json;charset=utf-8"))
-			   .andExpect(jsonPath("$", is(Boolean.FALSE)));
+		       .andExpect(content().contentType("application/json;charset=utf-8"))
+		       .andExpect(jsonPath("$", is(Boolean.FALSE)));
 	}
 
 	@Test
@@ -26,7 +26,7 @@ public class AuthenticationControllerTest extends BaseControllerTest {
 	public void findLoggedUserWithAuthenticatedUserTest() throws Exception {
 		
 		mockMvc.perform(get("/authenticated"))
-	           .andExpect(status().isOk())
+	               .andExpect(status().isOk())
 		       .andExpect(content().contentType("application/json;charset=utf-8"))
 		       .andExpect(jsonPath("$", is(Boolean.TRUE)));
 	}
@@ -36,8 +36,8 @@ public class AuthenticationControllerTest extends BaseControllerTest {
 	public void authoritiesWithAnonymousUserTest() throws Exception {
 		mockMvc.perform(get("/authorities"))
 		       .andExpect(status().isOk())
-			   .andExpect(content().contentType("application/json;charset=UTF-8"))
-			   .andExpect(jsonPath("$", hasSize(2)));
+		       .andExpect(content().contentType("application/json;charset=UTF-8"))
+		       .andExpect(jsonPath("$", hasSize(2)));
 	}
 
 	@Test
@@ -45,8 +45,8 @@ public class AuthenticationControllerTest extends BaseControllerTest {
 	public void languagesWithAnonymousUserTest() throws Exception {
 		mockMvc.perform(get("/languages"))
 		       .andExpect(status().isOk())
-			   .andExpect(content().contentType("application/json;charset=UTF-8"))
-			   .andExpect(jsonPath("$", hasSize(8)));
+		       .andExpect(content().contentType("application/json;charset=UTF-8"))
+		       .andExpect(jsonPath("$", hasSize(8)));
 	}
 
 }
