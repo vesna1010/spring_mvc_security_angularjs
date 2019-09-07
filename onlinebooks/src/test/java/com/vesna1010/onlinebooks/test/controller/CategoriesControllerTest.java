@@ -60,14 +60,12 @@ public class CategoriesControllerTest extends BaseControllerTest {
 	public void findAllCategoriesWithAnonymousUserTest() throws Exception {
 		when(service.findAllCategories(sort)).thenReturn(Arrays.asList(category1, category2));
 
-		mockMvc.perform(
-				get("/categories")
-				)
+		mockMvc.perform(get("/categories"))
 		       .andExpect(status().isOk())
-			   .andExpect(content().contentType("application/json;charset=UTF-8"))
-			   .andExpect(jsonPath("$", hasSize(2)))
-			   .andExpect(jsonPath("$[0].name", is("Category A")))
-			   .andExpect(jsonPath("$[1].name", is("Category B")));
+		       .andExpect(content().contentType("application/json;charset=UTF-8"))
+		       .andExpect(jsonPath("$", hasSize(2)))
+		       .andExpect(jsonPath("$[0].name", is("Category A")))
+		       .andExpect(jsonPath("$[1].name", is("Category B")));
 
 		verify(service, times(1)).findAllCategories(sort);
 	}
@@ -78,9 +76,7 @@ public class CategoriesControllerTest extends BaseControllerTest {
 		when(service.findCategoriesByPage(pageable)).thenReturn(
 				new PageImpl<Category>(Arrays.asList(category1, category2), pageable, 2));
 
-		mockMvc.perform(
-				get("/categories/page")
-				)
+		mockMvc.perform(get("/categories/page"))
 		       .andExpect(status().isUnauthorized());
 
 		verify(service, times(0)).findCategoriesByPage(pageable);
@@ -92,17 +88,15 @@ public class CategoriesControllerTest extends BaseControllerTest {
 		when(service.findCategoriesByPage(pageable)).thenReturn(
 				new PageImpl<Category>(Arrays.asList(category1, category2), pageable, 2));
 
-		mockMvc.perform(
-				get("/categories/page")
-				)
+		mockMvc.perform(get("/categories/page"))
 		       .andExpect(status().isOk())
-			   .andExpect(content().contentType("application/json;charset=UTF-8"))
-			   .andExpect(jsonPath("$.content", hasSize(2)))
-			   .andExpect(jsonPath("$.content[0].name", is("Category A")))
-			   .andExpect(jsonPath("$.content[1].name", is("Category B")))
-			   .andExpect(jsonPath("$.totalPages", is(1)))
-			   .andExpect(jsonPath("$.number", is(0)))
-			   .andExpect(jsonPath("$.size", is(10)));
+		       .andExpect(content().contentType("application/json;charset=UTF-8"))
+		       .andExpect(jsonPath("$.content", hasSize(2)))
+		       .andExpect(jsonPath("$.content[0].name", is("Category A")))
+		       .andExpect(jsonPath("$.content[1].name", is("Category B")))
+		       .andExpect(jsonPath("$.totalPages", is(1)))
+		       .andExpect(jsonPath("$.number", is(0)))
+		       .andExpect(jsonPath("$.size", is(10)));
 
 		verify(service, times(1)).findCategoriesByPage(pageable);
 	}
@@ -111,9 +105,7 @@ public class CategoriesControllerTest extends BaseControllerTest {
 	@WithAnonymousUser
 	public void categoryWithAnonymousUserTest() throws Exception {
 
-		mockMvc.perform(
-				get("/categories/new")
-				)
+		mockMvc.perform(get("/categories/new"))
 		       .andExpect(status().isUnauthorized());
 	}
 
@@ -121,13 +113,11 @@ public class CategoriesControllerTest extends BaseControllerTest {
 	@WithMockUser(authorities = "USER")
 	public void categoryWithAuthenticatedUserTest() throws Exception {
 
-		mockMvc.perform(
-				get("/categories/new")
-				)
+		mockMvc.perform(get("/categories/new"))
 		       .andExpect(status().isOk())
-			   .andExpect(content().contentType("application/json;charset=UTF-8"))
-			   .andExpect(jsonPath("$.id", is(nullValue())))
-			   .andExpect(jsonPath("$.name", is(nullValue())));
+		       .andExpect(content().contentType("application/json;charset=UTF-8"))
+		       .andExpect(jsonPath("$.id", is(nullValue())))
+		       .andExpect(jsonPath("$.name", is(nullValue())));
 	}
 
 	@Test
@@ -135,9 +125,7 @@ public class CategoriesControllerTest extends BaseControllerTest {
 	public void findCategoryByIdWithAnonymousUserTest() throws Exception {
 		when(service.findCategoryById(1L)).thenReturn(category1);
 
-		mockMvc.perform(
-				get("/categories/1")
-				)
+		mockMvc.perform(get("/categories/1"))
 		       .andExpect(status().isUnauthorized());
 
 		verify(service, times(0)).findCategoryById(1L);
@@ -148,12 +136,10 @@ public class CategoriesControllerTest extends BaseControllerTest {
 	public void findCategoryByIdWithAuthenticatedUserTest() throws Exception {
 		when(service.findCategoryById(1L)).thenReturn(category1);
 
-		mockMvc.perform(
-				get("/categories/1")
-				)
+		mockMvc.perform(get("/categories/1"))
 		       .andExpect(status().isOk())
-			   .andExpect(content().contentType("application/json;charset=UTF-8"))
-			   .andExpect(jsonPath("$.name", is("Category A")));
+		       .andExpect(content().contentType("application/json;charset=UTF-8"))
+		       .andExpect(jsonPath("$.name", is("Category A")));
 
 		verify(service, times(1)).findCategoryById(1L);
 	}
@@ -165,8 +151,8 @@ public class CategoriesControllerTest extends BaseControllerTest {
 
 		mockMvc.perform(get("/categories/1"))
 		       .andExpect(status().is4xxClientError())
-			   .andExpect(content().contentType("application/json;charset=UTF-8"))
-			   .andExpect(jsonPath("$.message", is("No category found with id 1")));
+		       .andExpect(content().contentType("application/json;charset=UTF-8"))
+		       .andExpect(jsonPath("$.message", is("No category found with id 1")));
 
 		verify(service, times(1)).findCategoryById(1L);
 	}
@@ -197,8 +183,8 @@ public class CategoriesControllerTest extends BaseControllerTest {
 				.content(new ObjectMapper().writeValueAsString(category1))
 				)
 		       .andExpect(status().isOk())
-			   .andExpect(content().contentType("text/plain;charset=ISO-8859-1"))
-			   .andExpect(jsonPath("$", is("Saved " + category1)));
+		       .andExpect(content().contentType("text/plain;charset=ISO-8859-1"))
+		       .andExpect(jsonPath("$", is("Saved " + category1)));
 
 		verify(service, times(1)).saveCategory(category1);
 	}
@@ -208,9 +194,7 @@ public class CategoriesControllerTest extends BaseControllerTest {
 	public void deleteCategoryByIdWithAnonymousUserTest() throws Exception {
 		doNothing().when(service).deleteCategoryById(1L);
 
-		mockMvc.perform(
-				delete("/categories/1")
-				)
+		mockMvc.perform(delete("/categories/1"))
 		       .andExpect(status().isUnauthorized());
 
 		verify(service, times(0)).deleteCategoryById(1L);
@@ -221,9 +205,7 @@ public class CategoriesControllerTest extends BaseControllerTest {
 	public void deleteCategoryByIdWithAuthenticatedUserTest() throws Exception {
 		doNothing().when(service).deleteCategoryById(1L);
 
-		mockMvc.perform(
-				delete("/categories/1")
-				)
+		mockMvc.perform(delete("/categories/1"))
 		       .andExpect(status().isOk());
 
 		verify(service, times(1)).deleteCategoryById(1L);
