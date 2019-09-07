@@ -29,7 +29,11 @@ public abstract class BaseControllerTest extends BaseTest {
 	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(context).apply(springSecurity()).build();
+		
+		this.mockMvc = MockMvcBuilders
+			.webAppContextSetup(context)
+			.apply(springSecurity())
+			.build();
 	}
 
 }
