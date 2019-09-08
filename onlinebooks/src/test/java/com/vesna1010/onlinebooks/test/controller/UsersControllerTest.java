@@ -85,7 +85,7 @@ public class UsersControllerTest extends BaseControllerTest {
 		       .andExpect(content().contentType("application/json;charset=UTF-8"))
 		       .andExpect(jsonPath("$.content", hasSize(2)))
 		       .andExpect(jsonPath("$.content[0].username", is("UsernameA")))
-	               .andExpect(jsonPath("$.content[1].username", is("UsernameB")))
+		       .andExpect(jsonPath("$.content[1].username", is("UsernameB")))
 		       .andExpect(jsonPath("$.totalPages", is(1)))
 		       .andExpect(jsonPath("$.number", is(0)))
 		       .andExpect(jsonPath("$.size", is(10)));
