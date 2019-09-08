@@ -129,7 +129,7 @@ public class AuthorsControllerTest extends BaseControllerTest {
 		       .andExpect(jsonPath("$.id", is(nullValue())))
 		       .andExpect(jsonPath("$.name", is(nullValue())))
 		       .andExpect(jsonPath("$.email", is(nullValue())))
-                       .andExpect(jsonPath("$.yearOfBirth", is(nullValue())));
+		       .andExpect(jsonPath("$.yearOfBirth", is(nullValue())));
 	}
 
 	@Test
