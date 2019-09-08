@@ -215,7 +215,7 @@ public class BooksControllerTest extends BaseControllerTest {
 		       .andExpect(jsonPath("$.title", is(nullValue())))
 		       .andExpect(jsonPath("$.language", is(nullValue())))
 		       .andExpect(jsonPath("$.category", is(nullValue())))
-	               .andExpect(jsonPath("$.authors", hasSize(0)));
+		       .andExpect(jsonPath("$.authors", hasSize(0)));
 	}
 	
 	@Test
@@ -253,8 +253,8 @@ public class BooksControllerTest extends BaseControllerTest {
 		
 		mockMvc.perform(get("/books/1234567890121"))
 		       .andExpect(status().is4xxClientError())
-	               .andExpect(content().contentType("application/json;charset=UTF-8"))
-	               .andExpect(jsonPath("$.message", is("No book found with isbn 1234567890121")));
+		       .andExpect(content().contentType("application/json;charset=UTF-8"))
+		       .andExpect(jsonPath("$.message", is("No book found with isbn 1234567890121")));
 
 		verify(service, times(1)).findBookByIsbn("1234567890121");
 	}
@@ -297,7 +297,7 @@ public class BooksControllerTest extends BaseControllerTest {
 		when(service.findBookByIsbn("1234567890121")).thenReturn(book1);
 		
 		mockMvc.perform(get("/books/download/1234567890121"))
-	               .andExpect(status().isOk())
+		       .andExpect(status().isOk())
 		       .andExpect(content().contentType("application/octet-stream"));
 
 		verify(service, times(1)).findBookByIsbn("1234567890121");
